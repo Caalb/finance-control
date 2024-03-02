@@ -58,22 +58,29 @@
     <UDivider
       class="mt-5"
       :label="$t('auth.login.or_continue_with')"
+      :ui="{ label: 'text-primary-500 dark:text-primary-400' }"
     />
 
     <div class="flex justify-center gap-3 mt-5">
       <UButton
         color="primary"
         variant="outline"
-      >
-        Google
-      </UButton>
+        icon="i-mdi-google"
+        size="md"
+      />
+
+      <UButton
+        variant="outline"
+        icon="i-mdi-github"
+        size="md"
+      />
 
       <UButton
         color="primary"
         variant="outline"
-      >
-        Facebook
-      </UButton>
+        icon="i-mdi-facebook"
+        size="md"
+      />
     </div>
   </div>
 </template>
