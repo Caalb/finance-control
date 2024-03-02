@@ -1,11 +1,11 @@
 <template>
-  <div class="w-full">
+  <ClientOnly>
     <USelect
         :options="formattedLocales"
         option-attribute="label"
         v-model="locale"
     />
-  </div>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
