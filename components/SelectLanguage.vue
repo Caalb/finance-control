@@ -1,11 +1,9 @@
 <template>
-  <ClientOnly>
-    <USelect
-        :options="formattedLocales"
-        option-attribute="label"
-        v-model="locale"
-    />
-  </ClientOnly>
+  <USelect
+    v-model="locale"
+    :options="formattedLocales"
+    option-attribute="label"
+  />
 </template>
 
 <script setup lang="ts">
