@@ -1,6 +1,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxt/ui'],
+  modules: [
+    '@nuxt/ui',
+    '@nuxt/image'
+  ],
   typescript: {
     typeCheck: true,
     strict: true,
