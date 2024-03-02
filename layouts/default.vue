@@ -29,7 +29,7 @@
       </UButton>
     </header>
 
-    <main>
+    <main class="h-full">
       <NuxtPage />
     </main>
   </div>
