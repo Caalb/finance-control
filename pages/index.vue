@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between h-full">
-    <div class="w-1/3 m-auto">
+    <div class="w-full m-auto max-w-[450px]">
       <h6 class="text-3xl mb-5">
         WELCOME BACK!
       </h6>
@@ -16,10 +16,11 @@
       <LoginForm />
     </div>
 
-    <div class="w-3/5 m-auto">
+    <div class="w-full max-w-[728px] m-auto max-md:hidden">
       <img
         src="~/assets/images/login.svg"
         alt="Login"
+        class="mt-o mx-auto"
       >
     </div>
   </div>
@@ -28,7 +29,3 @@
 <script setup lang="ts">
 
 </script>
-
-<style scoped>
-
-</style>
