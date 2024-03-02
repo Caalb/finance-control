@@ -35,7 +35,7 @@
       </UFormGroup>
     </UForm>
 
-    <div class="flex justify-between mt-3">
+    <div class="flex justify-between mt-3 items-center">
       <UCheckbox
         v-model="showPassword"
         :label="$t('auth.login.remember')"
