@@ -1,5 +1,10 @@
 <template>
-  <div>
-    <h1>Login Page</h1>
+  <div class="container">
+    <SelectLanguage />
+
+    {{ $t('hello', { name: 'Carlos' }) }}
   </div>
 </template>
+
+<script type="ts" setup>
+</script>
