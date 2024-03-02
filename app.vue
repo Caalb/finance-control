@@ -1,8 +1,7 @@
 <template>
-  <div class="container">
-    <SelectLanguage />
-    <ToggleTheme />
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <script type="ts" setup>
