@@ -1,4 +1,6 @@
 import { createI18n } from 'vue-i18n'
+import EN from '@/lang/en'
+import PT_BR from '@/lang/pt-br'
 
 export default defineNuxtPlugin(({ vueApp }) => {
   const i18n = createI18n({
@@ -7,19 +9,11 @@ export default defineNuxtPlugin(({ vueApp }) => {
       locale: 'pt-br',
       messages: {
           en: {
-              hello: 'Hello, {name}!',
-              locales: {
-                  en: 'English',
-                  'pt-br': 'Portuguese'
-              }
+             ...EN
           },
 
           'pt-br': {
-              hello: 'Olá, {name}!',
-              locales: {
-                  en: 'Inglês',
-                  'pt-br': 'Português'
-              }
+            ...PT_BR
           }
       }
   })

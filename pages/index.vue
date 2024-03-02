@@ -2,11 +2,11 @@
   <div class="flex justify-between h-full">
     <div class="w-full m-auto max-w-[450px]">
       <h6 class="text-3xl mb-5">
-        WELCOME BACK!
+        {{ $t('auth.login.title') }}
       </h6>
 
       <p>
-        Don't have an account?
+        {{ $t('auth.login.message') }}
 
         <NuxtLink to="/signup">
           Sign up

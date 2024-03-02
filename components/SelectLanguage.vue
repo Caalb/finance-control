@@ -11,6 +11,12 @@
 
 <script setup lang="ts">
   import { useI18n } from "vue-i18n";
+  import { computed } from "vue";
+
+  interface Locale {
+    label: string;
+    value: string;
+  }
 
   const {
     availableLocales,
@@ -18,8 +24,10 @@
     t
   } = useI18n();
 
-  const formattedLocales = availableLocales.map((locale) => ({
-    label: t(`locales.${locale}`),
+  const formattedLocales = computed<Locale[]>(() => {
+  return availableLocales.map((locale: string) => ({
+    label: t(`shared.locales.${locale}`),
     value: locale,
   }));
+});
 </script>

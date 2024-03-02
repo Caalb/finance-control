@@ -5,7 +5,7 @@
       class="flex flex-col gap-4"
     >
       <UFormGroup
-        label="Email"
+        :label="$t('auth.login.labels.email')"
         name="email"
       >
         <UInput
@@ -14,7 +14,7 @@
       </UFormGroup>
 
       <UFormGroup
-        label="Password"
+        :label="$t('auth.login.labels.password')"
         name="password"
       >
         <UInput
@@ -38,11 +38,11 @@
     <div class="flex justify-between mt-3">
       <UCheckbox
         v-model="showPassword"
-        label="Remember"
+        :label="$t('auth.login.remember')"
       />
 
       <UButton variant="link">
-        Forgot Password?
+        {{ $t('auth.login.forgot_password') }}
       </UButton>
     </div>
 
@@ -52,12 +52,12 @@
       color="primary"
       class="block w-full mt-5"
     >
-      Sign In
+      {{ $t('auth.login.submit') }}
     </UButton>
 
     <UDivider
       class="mt-5"
-      label="or continue with"
+      :label="$t('auth.login.or_continue_with')"
     />
 
     <div class="flex justify-center gap-3 mt-5">
@@ -81,18 +81,22 @@
 <script setup lang="ts">
   import { ref } from "vue";
 
-  const showPassword = ref(false);
-  const form = ref({
+  interface Form {
+    email: string;
+    password: string;
+  }
+
+  const showPassword = ref<boolean>(false);
+  const form = ref<Form>({
     email: "",
     password: "",
   });
 
-  const getEyeIcon = computed(() => {
+  const getEyeIcon = computed<string>(() => {
     return showPassword.value
       ? "i-heroicons-eye-20-solid"
       : "i-heroicons-eye-slash-20-solid"
   });
 
   const toggleShowPassword = () => showPassword.value = !showPassword.value;
-
 </script>

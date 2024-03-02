@@ -11,7 +11,7 @@
 <script setup lang="ts">
   const colorMode = useColorMode()
 
-  const isDark = computed({
+  const isDark = computed<boolean>({
     get () {
       return colorMode.value === 'dark'
     },
@@ -22,7 +22,7 @@
     }
   })
 
-  const toggleTheme = () => {
+  const toggleTheme = (): boolean => {
     colorMode.preference = isDark.value ? 'dark' : 'light'
 
     return isDark.value = !isDark.value
