@@ -1,6 +1,9 @@
 <template>
   <USelect
     v-model="locale"
+    size="xs"
+    color="gray"
+    variant="none"
     :options="formattedLocales"
     option-attribute="label"
   />
