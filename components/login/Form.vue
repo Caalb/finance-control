@@ -2,7 +2,9 @@
   <div>
     <UForm
       :state="form"
+      :schema
       class="flex flex-col gap-4"
+      @submit="onSubmit"
     >
       <UFormGroup
         :label="$t('auth.login.labels.email')"
@@ -33,28 +35,28 @@
           </template>
         </UInput>
       </UFormGroup>
-    </UForm>
 
-    <div class="flex justify-between mt-3 items-center">
-      <UCheckbox
-        v-model="showPassword"
-        :label="$t('auth.login.remember')"
-      />
+      <div class="flex justify-between mt-3 items-center">
+        <UCheckbox
+          v-model="remember"
+          :label="$t('auth.login.remember')"
+        />
 
-      <UButton variant="link">
-        {{ $t('auth.login.forgot_password') }}
+        <UButton variant="link">
+          {{ $t('auth.login.forgot_password') }}
+        </UButton>
+      </div>
+
+
+      <UButton
+        type="submit"
+        color="primary"
+        class="block w-full mt-5"
+      >
+        {{ $t('auth.login.sign_in') }}
       </UButton>
-    </div>
-
-
-    <UButton
-      type="submit"
-      color="primary"
-      class="block w-full mt-5"
-    >
-      {{ $t('auth.login.submit') }}
-    </UButton>
-
+    </UForm>
+      
     <UDivider
       class="mt-5"
       :label="$t('auth.login.or_continue_with')"
@@ -86,17 +88,32 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from "vue";
+  import { z } from "zod";
+  import { useI18n } from "vue-i18n";
 
+  import type { FormSubmitEvent } from '#ui/types'
+
+  type Schema = z.output<typeof schema>
   interface Form {
     email: string;
     password: string;
   }
 
+  const { t } = useI18n();
+
+  const remember = ref<boolean>(false);
   const showPassword = ref<boolean>(false);
-  const form = ref<Form>({
+  const form = reactive<Form>({
     email: "",
     password: "",
+  });
+
+  const schema = z.object({
+    email: z.string().email({ message: t('auth.login.validations.email')}),
+    password: z.string()
+      .min(8, { message: t('auth.login.validations.password.min') })
+      .regex(/[!@#$%^&*()\-_+=[\]{};:'"\\|<,>.?/]/, { message: t('auth.login.validations.password.special' )})
+      .regex(/[A-Z]/, { message: t('auth.login.validations.password.uppercase') })
   });
 
   const getEyeIcon = computed<string>(() => {
@@ -106,4 +123,16 @@
   });
 
   const toggleShowPassword = () => showPassword.value = !showPassword.value;
+  const onSubmit = ({ data: { email }}: FormSubmitEvent<Schema>) => {
+    const expiration = new Date();
+    expiration.setMinutes(expiration.getMinutes() + 1);
+
+    localStorage.setItem("auth", JSON.stringify({
+      email,
+      expiration: expiration.toISOString(),
+      remember: remember.value,
+    }));
+
+    navigateTo("/");
+  };
 </script>
