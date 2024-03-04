@@ -1,14 +1,16 @@
 <template>
   <UToggle
-    on-icon="i-heroicons-moon-20-solid"
-    off-icon="i-heroicons-sun-20-solid"
-    :model-value="isDark"
-    color="gray"
+    on-icon="i-heroicons-sun-20-solid"
+    off-icon="i-heroicons-mon-20-solid"
+    :model-value="! isDark"
+    color="yellow"
+    data-testid="toggle-theme"
     @click="toggleTheme"
   />
 </template>
 
 <script setup lang="ts">
+console.log(useColorMode().value)
   const colorMode = useColorMode()
 
   const isDark = computed<boolean>({
@@ -17,14 +19,12 @@
     },
 
     set () {
-      colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+      colorMode.preference = colorMode.value === 'light' ? 'dark' : 'light'
       localStorage.setItem('theme', colorMode.preference)
     }
   })
 
   const toggleTheme = (): boolean => {
-    colorMode.preference = isDark.value ? 'dark' : 'light'
-
     return isDark.value = !isDark.value
   }
 </script>
