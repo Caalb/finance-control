@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/image',
     '@vueuse/nuxt',
+    '@nuxt/test-utils/module',
   ],
   typescript: {
     typeCheck: true,
