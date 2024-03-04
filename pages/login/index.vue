@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-between h-full">
     <div class="w-full m-auto max-w-[500px]">
-      <h6 class="text-3xl mb-10">
+      <h6 class="text-3xl mb-10 uppercase font-extrabold">
         {{ $t('auth.login.title') }}
       </h6>
 
