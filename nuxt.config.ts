@@ -1,7 +1,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
-  ui: { icons: ['mdi'] },
   app: { head: { title: "Login Page" } },
   modules: [
     '@nuxt/ui',
@@ -9,6 +8,10 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/test-utils/module',
   ],
+  ui: {
+    primary: 'sky',
+    icons: ['mdi']
+  },
   typescript: {
     typeCheck: true,
     strict: true,
