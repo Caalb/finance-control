@@ -1,17 +1,7 @@
-<template>
-  <USelect
-    v-model="locale"
-    size="xs"
-    color="gray"
-    variant="none"
-    :options="formattedLocales"
-    option-attribute="label"
-  />
-</template>
-
 <script setup lang="ts">
   import { useI18n } from "vue-i18n";
 
+  // sugeriria botar Locale em outro arquivo, e ele ser plural. Mas aqui tá de boas
   interface Locale {
     label: string;
     value: string;
@@ -30,3 +20,14 @@
   }));
 });
 </script>
+
+<template>
+  <USelect
+    v-model="locale"
+    size="xs"
+    color="gray"
+    variant="none"
+    :options="formattedLocales"
+    option-attribute="label"
+  />
+</template>
