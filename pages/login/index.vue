@@ -1,11 +1,14 @@
+<script lang="ts" setup>
+  // no vue 3, sempre script no topo. Facilita a leitura.
+  useHead({ title: "Login Page | Login " })
+</script>
+
 <template>
   <div class="flex justify-between h-full">
     <div class="w-full m-auto max-w-[500px]">
       <h6 class="text-3xl mb-10 uppercase font-extrabold">
         {{ $t('auth.login.title') }}
       </h6>
-
-
       <i18n-t
         keypath="auth.login.message"
         tag="p"
@@ -21,11 +24,10 @@
           </UButton>
         </template>
       </i18n-t>
-
       <LoginForm />
     </div>
-
     <div class="w-full max-w-[728px] m-auto max-md:hidden">
+      <!-- este arquivo pode ser exportado em png ou webp. Ficará mais leve. tente exportar para menos que 244kb para aproveitar o http/2 -->
       <img
         src="~/assets/images/login.svg"
         alt="Login"
@@ -34,7 +36,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-  useHead({ title: "Login Page | Login " })
-</script>
