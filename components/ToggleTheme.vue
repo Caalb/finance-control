@@ -1,3 +1,19 @@
+<script setup lang="ts">
+  const colorMode = useColorMode()
+
+  const isDark = computed<boolean>({
+    get () {
+      return colorMode.value === 'dark'
+    },
+    set () {
+      colorMode.preference = colorMode.value === 'light' ? 'dark' : 'light'
+      localStorage.setItem('theme', colorMode.preference)
+    }
+  })
+
+  const toggleTheme = (): boolean => isDark.value = !isDark.value
+</script>
+
 <template>
   <UToggle
     on-icon="i-heroicons-sun-20-solid"
@@ -8,23 +24,3 @@
     @click="toggleTheme"
   />
 </template>
-
-<script setup lang="ts">
-console.log(useColorMode().value)
-  const colorMode = useColorMode()
-
-  const isDark = computed<boolean>({
-    get () {
-      return colorMode.value === 'dark'
-    },
-
-    set () {
-      colorMode.preference = colorMode.value === 'light' ? 'dark' : 'light'
-      localStorage.setItem('theme', colorMode.preference)
-    }
-  })
-
-  const toggleTheme = (): boolean => {
-    return isDark.value = !isDark.value
-  }
-</script>
