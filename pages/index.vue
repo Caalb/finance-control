@@ -1,9 +1,3 @@
-<template>
-  <div>
-    <h1>Home</h1>
-  </div>
-</template>
-
 <script setup lang="ts">
   definePageMeta({
     title: "Home",
@@ -12,3 +6,9 @@
 
   useHead({ title: "Login Page | Home" })
 </script>
+
+<template>
+  <div class="w-full">
+    <h1>Home</h1>
+  </div>
+</template>
