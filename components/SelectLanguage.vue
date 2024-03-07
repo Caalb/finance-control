@@ -1,21 +1,7 @@
-<template>
-  <USelect
-    v-model="locale"
-    size="xs"
-    color="gray"
-    variant="none"
-    :options="formattedLocales"
-    option-attribute="label"
-  />
-</template>
-
 <script setup lang="ts">
   import { useI18n } from "vue-i18n";
 
-  interface Locale {
-    label: string;
-    value: string;
-  }
+  import type { Locale } from "~/types/shared";
 
   const {
     availableLocales,
@@ -30,3 +16,14 @@
   }));
 });
 </script>
+
+<template>
+  <USelect
+    v-model="locale"
+    size="xs"
+    color="gray"
+    variant="none"
+    :options="formattedLocales"
+    option-attribute="label"
+  />
+</template>
