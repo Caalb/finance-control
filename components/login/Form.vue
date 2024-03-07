@@ -1,3 +1,41 @@
+<script setup lang="ts">
+  import { z } from "zod";
+  import { useI18n } from "vue-i18n";
+  import type { FormSubmitEvent } from '#ui/types'
+  const { t } = useI18n();
+  const remember = ref<boolean>(false);
+  const showPassword = ref<boolean>(false);
+  
+  const schema = z.object({
+    email: z.string().email({ message: t('auth.login.validations.email')}),
+    password: z.string()
+      .min(8, { message: t('auth.login.validations.password.min') })
+      .regex(/[!@#$%^&*()\-_+=[\]{};:'"\\|<,>.?/]/, { message: t('auth.login.validations.password.special' )}) 
+      .regex(/[A-Z]/, { message: t('auth.login.validations.password.uppercase') }) 
+  });
+  type Schema = z.output<typeof schema>
+  const form = reactive<Schema>({
+    email: "",
+    password: "",
+  });
+  const getEyeIcon = computed<string>(() => showPassword.value
+      ? "i-heroicons-eye-20-solid"
+      : "i-heroicons-eye-slash-20-solid");
+      
+  const toggleShowPassword = () => showPassword.value = !showPassword.value;
+  const onSubmit = async ({ data: { email }}: FormSubmitEvent<Schema>) => {
+    const expiration = new Date();
+    expiration.setMinutes(expiration.getMinutes() + 1);
+
+    localStorage.setItem("auth", JSON.stringify({
+      email,
+      expiration: expiration.toISOString(),
+      remember: remember.value,
+    }));
+    await navigateTo("/");
+  };
+</script>
+
 <template>
   <div>
     <UForm
@@ -87,52 +125,3 @@
   </div>
 </template>
 
-<script setup lang="ts">
-  import { z } from "zod";
-  import { useI18n } from "vue-i18n";
-
-  import type { FormSubmitEvent } from '#ui/types'
-
-  type Schema = z.output<typeof schema>
-  interface Form {
-    email: string;
-    password: string;
-  }
-
-  const { t } = useI18n();
-
-  const remember = ref<boolean>(false);
-  const showPassword = ref<boolean>(false);
-  const form = reactive<Form>({
-    email: "",
-    password: "",
-  });
-
-  const schema = z.object({
-    email: z.string().email({ message: t('auth.login.validations.email')}),
-    password: z.string()
-      .min(8, { message: t('auth.login.validations.password.min') })
-      .regex(/[!@#$%^&*()\-_+=[\]{};:'"\\|<,>.?/]/, { message: t('auth.login.validations.password.special' )})
-      .regex(/[A-Z]/, { message: t('auth.login.validations.password.uppercase') })
-  });
-
-  const getEyeIcon = computed<string>(() => {
-    return showPassword.value
-      ? "i-heroicons-eye-20-solid"
-      : "i-heroicons-eye-slash-20-solid"
-  });
-
-  const toggleShowPassword = () => showPassword.value = !showPassword.value;
-  const onSubmit = ({ data: { email }}: FormSubmitEvent<Schema>) => {
-    const expiration = new Date();
-    expiration.setMinutes(expiration.getMinutes() + 1);
-
-    localStorage.setItem("auth", JSON.stringify({
-      email,
-      expiration: expiration.toISOString(),
-      remember: remember.value,
-    }));
-
-    navigateTo("/");
-  };
-</script>
