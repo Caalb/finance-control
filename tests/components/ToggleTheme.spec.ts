@@ -10,9 +10,7 @@ import { mockNuxtImport } from '@nuxt/test-utils/runtime'
 
 import { ToggleTheme } from "#components";
 
-const createComponent = () => {
-  return mount(ToggleTheme, {});
-}
+const createComponent = () => mount(ToggleTheme, {});
 
 mockNuxtImport('useColorMode', () => {
   return () => ({ value: 'light'})
