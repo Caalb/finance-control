@@ -1,4 +1,8 @@
 import type { $Fetch } from "ofetch";
+import type { 
+  CryptoHistoryQuery, 
+  CryptoQuery
+ } from './types'
 
 export default class MobulaService {
   private fetch: $Fetch;
@@ -7,10 +11,21 @@ export default class MobulaService {
     this.fetch = fetch;
   }
 
-  async getAnyCryptoPrice({ crypto }: { crypto: string }) {
-    return await this.fetch('/market/data', {
+  getAnyCryptoPrice(query: CryptoQuery) {
+    const { crypto } = query;
+    
+    return this.fetch('/market/data', {
       method: 'GET',
       query: { asset: crypto }
-    })
+    });
   }
-} 
+
+  getCryptoPriceHistory(query: CryptoHistoryQuery) {
+    const { crypto, from } = query;
+    
+    return this.fetch('/market/history', {
+      method: 'GET',
+      query: { asset: crypto, from }
+    });
+  }
+}
