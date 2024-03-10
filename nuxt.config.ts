@@ -13,4 +13,10 @@ export default defineNuxtConfig({
     typeCheck: true,
     strict: true,
   },
+
+  runtimeConfig: {
+    public: {
+      MOBULA_API_KEY: process.env.MOBULA_API_KEY,
+    }
+  }
 })
