@@ -11,21 +11,25 @@ export default class MobulaService {
     this.fetch = fetch;
   }
 
-  getAnyCryptoPrice(query: CryptoQuery) {
+  async getAnyCryptoPrice(query: CryptoQuery) {
     const { crypto } = query;
     
-    return this.fetch('/market/data', {
+    console.log('query', query)
+    return await this.fetch('/market/data', {
       method: 'GET',
       query: { asset: crypto }
     });
   }
 
-  getCryptoPriceHistory(query: CryptoHistoryQuery) {
+  async getCryptoPriceHistory(query: CryptoHistoryQuery) {
     const { crypto, from } = query;
     
-    return this.fetch('/market/history', {
+    return await this.fetch('/market/history', {
       method: 'GET',
-      query: { asset: crypto, from }
+      query: { 
+        asset: crypto,
+        from
+       }
     });
   }
 }
