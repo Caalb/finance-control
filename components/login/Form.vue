@@ -25,7 +25,7 @@
   const toggleShowPassword = () => showPassword.value = !showPassword.value;
   const onSubmit = async ({ data: { email }}: FormSubmitEvent<Schema>) => {
     const expiration = new Date();
-    expiration.setMinutes(expiration.getMinutes() + 1);
+    expiration.setMinutes(expiration.getMinutes() + 20);
 
     localStorage.setItem("auth", JSON.stringify({
       email,

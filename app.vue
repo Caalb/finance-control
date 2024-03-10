@@ -14,5 +14,6 @@
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
     return colorMode.preference = prefersDark ? 'dark' : 'light'
   }
+  
   onMounted(() => setThemePreference())
 </script>
