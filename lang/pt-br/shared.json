@@ -2,5 +2,12 @@
   "locales": {
     "en": "Inglês",
     "pt-br": "Português"
+  },
+
+  "index": {
+    "select": {
+      "searchable_placeholder": "Busque uma cryptomoeda",
+      "placeholder": "Selecione uma cryptomoeda"
+    }
   }
 }
