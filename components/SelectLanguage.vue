@@ -10,11 +10,11 @@
   } = useI18n();
 
   const formattedLocales = computed<Locale[]>(() => {
-  return availableLocales.map((locale: string) => ({
-    label: t(`shared.locales.${locale}`),
-    value: locale,
-  }));
-});
+    return availableLocales.map((locale: string) => ({
+      label: t(`shared.locales.${locale}`),
+      value: locale,
+    })
+  )});
 </script>
 
 <template>
