@@ -1,7 +1,8 @@
 import type { $Fetch } from "ofetch";
 import type { 
   CryptoHistoryQuery, 
-  CryptoQuery
+  CryptoQuery,
+  AllCryptocurrenciesQuery,
  } from './types'
 
 export default class MobulaService {
@@ -31,5 +32,23 @@ export default class MobulaService {
         from
        }
     });
+  }
+
+  async getAllCryptocurrencies(query: AllCryptocurrenciesQuery = {}) {
+    return await this.fetch('/all', {
+      method: 'GET',
+      query: { ...query }
+    })
+  }
+
+  async searchCryptocurrencies(query: string) {
+    if (!query.trim()) {
+      query = "Bitcoin";
+    }
+  
+    return await this.fetch('/search', {
+      method: 'GET',
+      query: { input: query }
+    })
   }
 }
