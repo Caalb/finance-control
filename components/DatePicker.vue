@@ -15,7 +15,7 @@ const emit = defineEmits(['update:model-value', 'close'])
 const date = computed({
   get: () => props.modelValue,
   set: (value) => {
-    emit('update:model-value', value)
+    emit('update:model-value', value) // dá uma olhada depois em defineModel
     emit('close')
   }
 })
@@ -37,6 +37,7 @@ const attrs = {
 </template>
 
 <style>
+/* isto não seria melhor ser importado na pasta assets? */
 :root {
   --vc-gray-50: rgb(var(--color-gray-50));
   --vc-gray-100: rgb(var(--color-gray-100));
