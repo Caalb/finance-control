@@ -4,9 +4,8 @@ interface IHttp {
   mobula: MobulaService;
 }
 
-
 export default defineNuxtPlugin(async () => {
-  const { public: { MOBULA_API_KEY} } = useRuntimeConfig();
+  const { public: { MOBULA_API_KEY } } = useRuntimeConfig();
   const fetcher = $fetch.create({
     baseURL: 'https://api.mobula.io/api/1',
     onRequest({ options }) {

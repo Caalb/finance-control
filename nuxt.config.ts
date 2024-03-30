@@ -18,5 +18,7 @@ export default defineNuxtConfig({
     public: {
       MOBULA_API_KEY: process.env.MOBULA_API_KEY,
     }
-  }
+  },
+
+  experimental: { typedPages: true }
 })

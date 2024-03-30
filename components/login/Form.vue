@@ -2,6 +2,7 @@
   import { z } from "zod";
   import { useI18n } from "vue-i18n";
   import type { FormSubmitEvent } from '#ui/types'
+
   const { t } = useI18n();
   const remember = ref<boolean>(false);
   const showPassword = ref<boolean>(false);
@@ -13,11 +14,13 @@
       .regex(/[!@#$%^&*()\-_+=[\]{};:'"\\|<,>.?/]/, { message: t('auth.login.validations.password.special' )}) 
       .regex(/[A-Z]/, { message: t('auth.login.validations.password.uppercase') }) 
   });
+
   type Schema = z.output<typeof schema>
   const form = reactive<Schema>({
     email: "",
     password: "",
   });
+
   const getEyeIcon = computed<string>(() => showPassword.value
       ? "i-heroicons-eye-20-solid"
       : "i-heroicons-eye-slash-20-solid");
@@ -32,6 +35,7 @@
       expiration: expiration.toISOString(),
       remember: remember.value,
     }));
+
     await navigateTo("/");
   };
 </script>
@@ -48,9 +52,7 @@
         :label="$t('auth.login.labels.email')"
         name="email"
       >
-        <UInput
-          v-model="form.email"
-        />
+        <UInput v-model="form.email" />
       </UFormGroup>
 
       <UFormGroup
