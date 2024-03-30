@@ -6,7 +6,8 @@
   const { t } = useI18n();
   const remember = ref<boolean>(false);
   const showPassword = ref<boolean>(false);
-  
+
+  // para o registro de usuários na tua plataforma, este código abaixo está excepcional. Pra Login, é péssimo, pois ajuda o hacker a situar qual tipo de ataque é mais rápido.
   const schema = z.object({
     email: z.string().email({ message: t('auth.login.validations.email')}),
     password: z.string()
@@ -28,6 +29,8 @@
   const toggleShowPassword = () => showPassword.value = !showPassword.value;
   const onSubmit = async ({ data: { email }}: FormSubmitEvent<Schema>) => {
     const expiration = new Date();
+
+    // coonsidere usar a lib jose (panva/jose) para configurar uma validação de JSON.
     expiration.setMinutes(expiration.getMinutes() + 20);
 
     localStorage.setItem("auth", JSON.stringify({
