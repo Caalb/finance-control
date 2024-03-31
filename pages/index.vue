@@ -29,6 +29,7 @@
   const fetchHistory = async () => {
     try {
       fetchHistoryLoading.value = true;
+      // você já tem o useFetch e o $fetch no nuxt. Tu instalou o ofetch para ter ele duas vezes. Veja este vídeo para tirar dúvidas: https://www.youtube.com/watch?v=njsGVmcWviY&t=21s
       const { data: { price_history: history } } = await $http.mobula.getCryptoPriceHistory({
         crypto: crypto.value,
         from: dateToUnixTimestamp(date.value),
