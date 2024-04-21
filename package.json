@@ -24,6 +24,7 @@
     "chart.js": "^4.4.2",
     "date-fns": "^2.30.0",
     "drizzle-orm": "^0.29.5",
+    "jose": "github:panva/jose",
     "nuxt": "^3.10.3",
     "v-calendar": "^3.1.2",
     "vue": "^3.4.19",
