@@ -20,6 +20,7 @@
     "@iconify-json/mdi": "^1.1.64",
     "@libsql/client": "^0.5.6",
     "@nuxt/ui": "^2.14.1",
+    "@panva/jose": "^1.9.3",
     "@vueuse/nuxt": "^10.9.0",
     "chart.js": "^4.4.2",
     "date-fns": "^2.30.0",
