@@ -5,10 +5,7 @@ import {
   text
 } from "drizzle-orm/sqlite-core";
 
-const TransactionTypes = {
-  INCOME: 'income',
-  EXPENSE: 'expense'
-}
+import { TransactionTypes } from "~/enums/transactions_types";
 
 export const users = sqliteTable('users', {
   id: integer('id').primaryKey(),

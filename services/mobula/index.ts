@@ -3,7 +3,7 @@ import type {
   CryptoHistoryQuery, 
   CryptoQuery,
   AllCryptocurrenciesQuery,
- } from './types'
+} from './types'
 
 export default class MobulaService {
   private fetch: $Fetch;
@@ -30,7 +30,7 @@ export default class MobulaService {
       query: { 
         asset: crypto,
         from
-       }
+      }
     });
   }
 

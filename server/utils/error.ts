@@ -1,21 +1,10 @@
-import { ZodError, z } from "zod";
-
-interface CustomErrorParams {
-  errors?: string[] | ZodError;
-  statusCode: number;
-  message?: string;
-}
-
-interface ValidationError {
-  schema: z.ZodType<any, any>;
-  body: unknown;
-}
+import { ICustomErrorParams } from "@/server/interfaces/IError"
 
 export const createCustomError = ({
   errors,
   statusCode,
   message,
-}: CustomErrorParams) => {
+}: ICustomErrorParams) => {
   return createError({
     statusCode,
     message,
@@ -25,14 +14,3 @@ export const createCustomError = ({
   })
 }
 
-export const useValidation = ({ schema, body }: ValidationError) => {
-  try {
-    return schema.parse(body);
-  } catch (error: unknown) {
-    const zodError = error as ZodError;
-    throw createCustomError({
-      errors: zodError.issues.map((issue) => issue.message),
-      statusCode: 422,
-    });
-  }
-}

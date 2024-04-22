@@ -48,7 +48,7 @@ export default defineEventHandler(async (event) => {
   const token = jose.JWT.sign({ 
     username,
     user_id: model.id,
-   }, secretKey, { expiresIn: '8h' });
+  }, secretKey, { expiresIn: '8h' });
 
   return { token }
 })

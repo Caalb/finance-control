@@ -12,23 +12,23 @@ const updateTransaction = async ({
   const db = useDataBase();
 
   const [ model ] = await db
-  .update(finance_transactions)
-  .set({
-    amount,
-    transaction_type,
-  })
-  .where(
-    and(
-      eq(finance_transactions.user_id, user_id),
-      eq(finance_transactions.id, Number(transaction_id))
+    .update(finance_transactions)
+    .set({
+      amount,
+      transaction_type,
+    })
+    .where(
+      and(
+        eq(finance_transactions.user_id, user_id),
+        eq(finance_transactions.id, Number(transaction_id))
+      )
     )
-  )
-  .returning({
-    id: finance_transactions.id,
-    amount: finance_transactions.amount,
-    transaction_type: finance_transactions.transaction_type,
-    created_at: finance_transactions.created_at,
-  });
+    .returning({
+      id: finance_transactions.id,
+      amount: finance_transactions.amount,
+      transaction_type: finance_transactions.transaction_type,
+      created_at: finance_transactions.created_at,
+    });
   
   return model;
 }

@@ -15,7 +15,7 @@ const isPublicRoute = (event: H3Event<EventHandlerRequest>) => {
 }
 
 export const useServerAuth = () => ({
-   isPublicRoute 
+  isPublicRoute 
 });
 
 export const getJWTData = (token: string): JWTData => {

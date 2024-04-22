@@ -4,9 +4,9 @@ import { eq } from "drizzle-orm";
 const getAllTransactions = async (user_id: number) => {
   const db = useDataBase();
   const response = await db
-  .select()
-  .from(finance_transactions)
-  .where(eq(finance_transactions.user_id, user_id));
+    .select()
+    .from(finance_transactions)
+    .where(eq(finance_transactions.user_id, user_id));
 
   return response;
 }
