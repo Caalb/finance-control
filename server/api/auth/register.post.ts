@@ -1,6 +1,6 @@
 import { users } from "@/server/database/schema";
 import { eq, or } from "drizzle-orm";
-import { RegisterSchema } from "~/server/validations/schemas/register";
+import { RegisterSchema } from "~/server/validations/schemas/user";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);

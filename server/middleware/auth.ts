@@ -16,6 +16,8 @@ export default defineEventHandler((event) => {
   const secretKey = createSecretKey(process.env.JWT_SECRET_KEY as string, 'utf-8');
   try {
     jose.JWT.verify(token, secretKey);
+
+    event.context.token = token;
   } catch (err) {
     throw createError({
       statusCode: 401,

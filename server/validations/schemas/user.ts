@@ -8,3 +8,4 @@ export const RegisterSchema = z.object({
     .regex(/[!@#$%^&*()\-_+=[\]{};:'"\\|<,>.?/]/, { message: t('auth.login.validations.password.special' )}) 
     .regex(/[A-Z]/, { message: t('auth.login.validations.password.uppercase') }) 
 });
+
