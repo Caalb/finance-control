@@ -1,6 +1,6 @@
-import { finance_transactions } from "~/server/database/schema";
-import { TransactionSchema } from "~/server/validations/schemas/transactions";
-import type { ICreateTransaction } from "~/server/interfaces/ITransaction";
+import { finance_transactions } from '~/server/database/schema';
+import { TransactionSchema } from '~/server/validations/schemas/transactions';
+import type { ICreateTransaction } from '~/server/interfaces/ITransaction';
 
 const createTransaction = async ({ amount, transaction_type, user_id }: ICreateTransaction) => {
   const db = useDataBase();
@@ -21,13 +21,13 @@ const createTransaction = async ({ amount, transaction_type, user_id }: ICreateT
     });
 
   return model;
-}
+};
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { user_id } = getJWTData(event.context.token);
 
-  useValidation({ schema: TransactionSchema, body })
+  useValidation({ schema: TransactionSchema, body });
 
   return createTransaction({ ...body, user_id });
-})
+});

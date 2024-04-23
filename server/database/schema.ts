@@ -3,9 +3,9 @@ import {
   integer,
   real,
   text
-} from "drizzle-orm/sqlite-core";
+} from 'drizzle-orm/sqlite-core';
 
-import { TransactionTypes } from "~/enums/transactions_types";
+import { TransactionTypes } from '~/enums/transactions_types';
 
 export const users = sqliteTable('users', {
   id: integer('id').primaryKey(),

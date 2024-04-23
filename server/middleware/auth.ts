@@ -1,4 +1,5 @@
 import { createSecretKey } from 'crypto';
+
 import jose from '@panva/jose';
 
 export default defineEventHandler((event) => {
@@ -10,7 +11,7 @@ export default defineEventHandler((event) => {
     throw createError({
       statusCode: 401,
       message: 'Unauthorized',
-    })
+    });
   }
 
   const secretKey = createSecretKey(process.env.JWT_SECRET_KEY as string, 'utf-8');
@@ -22,6 +23,6 @@ export default defineEventHandler((event) => {
     throw createError({
       statusCode: 401,
       message: 'Unauthorized',
-    })
+    });
   }
-})
+});

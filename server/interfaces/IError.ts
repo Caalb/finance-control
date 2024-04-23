@@ -1,4 +1,4 @@
-import { ZodError} from "zod";
+import { ZodError} from 'zod';
 
 export interface ICustomErrorParams {
   errors?: string[] | ZodError;

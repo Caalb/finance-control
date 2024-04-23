@@ -1,7 +1,8 @@
-import { users } from "@/server/database/schema";
-import { eq, or } from "drizzle-orm";
-import type { IUserRegister } from "~/server/interfaces/IUser";
-import { RegisterSchema } from "~/server/validations/schemas/user";
+import { eq, or } from 'drizzle-orm';
+
+import { users } from '@/server/database/schema';
+import type { IUserRegister } from '~/server/interfaces/IUser';
+import { RegisterSchema } from '~/server/validations/schemas/user';
 
 const verifyIfExistingUser = async ({ username, email }: IUserRegister) => {
   const db = useDataBase();
@@ -19,23 +20,23 @@ const verifyIfExistingUser = async ({ username, email }: IUserRegister) => {
     throw createCustomError({
       statusCode: 400,
       message: t('auth.user_exists'),
-    })
+    });
   }
-}
+};
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const db = useDataBase();
 
   await verifyIfExistingUser({ ...body });
-  useValidation({ schema: RegisterSchema, body })  
+  useValidation({ schema: RegisterSchema, body });
 
   const result = await db.insert(users).values({
     username: body.username,
     password: body.password,
     email: body.email,
     created_at: new Date(),
-  })
+  });
 
-  return { data: result }
-})
+  return { data: result };
+});

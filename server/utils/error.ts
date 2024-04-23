@@ -1,4 +1,4 @@
-import { ICustomErrorParams } from "@/server/interfaces/IError"
+import { ICustomErrorParams } from '@/server/interfaces/IError';
 
 export const createCustomError = ({
   errors,
@@ -11,6 +11,6 @@ export const createCustomError = ({
     data: {
       errors,
     },
-  })
-}
+  });
+};
 

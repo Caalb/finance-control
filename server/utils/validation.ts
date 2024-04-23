@@ -1,6 +1,6 @@
-import { ZodError } from "zod";
+import { ZodError } from 'zod';
 
-import { IValidationError } from "@/server/interfaces/IValidation";
+import { IValidationError } from '@/server/interfaces/IValidation';
 
 export const useValidation = ({ schema, body }: IValidationError) => {
   try {
@@ -12,4 +12,4 @@ export const useValidation = ({ schema, body }: IValidationError) => {
       statusCode: 422,
     });
   }
-}
+};

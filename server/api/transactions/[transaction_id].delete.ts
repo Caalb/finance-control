@@ -1,6 +1,7 @@
-import { and, eq } from "drizzle-orm";
-import { finance_transactions } from "~/server/database/schema";
-import type { ITransactionOperations } from "~/server/interfaces/ITransaction";
+import { and, eq } from 'drizzle-orm';
+
+import { finance_transactions } from '~/server/database/schema';
+import type { ITransactionOperations } from '~/server/interfaces/ITransaction';
 
 async function deleteTransaction({ transaction_id, user_id }: ITransactionOperations) {
   const db = useDataBase();
@@ -24,18 +25,18 @@ async function deleteTransaction({ transaction_id, user_id }: ITransactionOperat
 }
 
 export default eventHandler(async (event) => {
-  const transaction_id = getRouterParam(event, 'transaction_id')
+  const transaction_id = getRouterParam(event, 'transaction_id');
   const { user_id } = getJWTData(event.context.token);
 
   if(! transaction_id) {
-    return createCustomError({ statusCode: 400 })
+    return createCustomError({ statusCode: 400 });
   }
-  
+
   const model = await deleteTransaction({ transaction_id, user_id });
 
   if(! model) {
-    return createCustomError({ statusCode: 404 })
+    return createCustomError({ statusCode: 404 });
   }
 
   return model;
-})
+});

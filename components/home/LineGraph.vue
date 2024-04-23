@@ -1,7 +1,6 @@
 <script setup lang=ts>
-import { Line } from 'vue-chartjs'
-import type { ChartData, Point, ChartOptions } from 'chart.js'
-
+import { Line } from 'vue-chartjs';
+import type { ChartData, Point, ChartOptions } from 'chart.js';
 import {
   Chart as ChartJS,
   Title,
@@ -11,7 +10,7 @@ import {
   LinearScale,
   CategoryScale,
   PointElement
-} from 'chart.js'
+} from 'chart.js';
 
 ChartJS.register(
   Title,
@@ -21,9 +20,9 @@ ChartJS.register(
   LinearScale,
   CategoryScale,
   PointElement
-)
+);
 
-const props = defineProps<{ data: ChartData<"line", (number | Point | null)[], unknown> }>()
+const props = defineProps<{ data: ChartData<'line', (number | Point | null)[], unknown> }>();
 const options: ChartOptions<'line'> = {
   responsive: true,
   maintainAspectRatio: false,
@@ -46,7 +45,7 @@ const options: ChartOptions<'line'> = {
       radius: 0
     }
   }
-}
+};
 </script>
 
 <template>

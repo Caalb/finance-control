@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-useHead({ title: "Login Page | Login " })
+useHead({ title: 'Login Page | Login ' });
 </script>
 
 <template>

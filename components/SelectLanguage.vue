@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 
-import type { Locale } from "~/types/shared";
+import type { Locale } from '~/types/shared';
 
 const {
   availableLocales,
@@ -14,7 +14,7 @@ const formattedLocales = computed<Locale[]>(() => {
     label: t(`shared.locales.${locale}`),
     value: locale,
   })
-  )});
+  );});
 </script>
 
 <template>

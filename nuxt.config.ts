@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   ui: { icons: ['mdi'] },
-  app: { head: { title: "Login Page" } },
+  app: { head: { title: 'Login Page' } },
   modules: [
     '@nuxt/ui',
     '@nuxt/image',
@@ -22,4 +22,4 @@ export default defineNuxtConfig({
   },
 
   experimental: { typedPages: true }
-})
+});

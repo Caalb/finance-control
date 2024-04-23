@@ -1,4 +1,4 @@
-import { drizzle } from "drizzle-orm/libsql";
+import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 
 const turso = createClient({
@@ -6,4 +6,4 @@ const turso = createClient({
   authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
-export const useDataBase = () => drizzle(turso)
+export const useDataBase = () => drizzle(turso);

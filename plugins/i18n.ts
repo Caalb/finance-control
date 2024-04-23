@@ -1,6 +1,7 @@
-import { createI18n } from 'vue-i18n'
-import EN from '@/lang/en'
-import PT_BR from '@/lang/pt-br'
+import { createI18n } from 'vue-i18n';
+
+import EN from '@/lang/en';
+import PT_BR from '@/lang/pt-br';
 
 export default defineNuxtPlugin(({ vueApp }) => {
   const i18n = createI18n({
@@ -16,7 +17,7 @@ export default defineNuxtPlugin(({ vueApp }) => {
         ...PT_BR
       }
     }
-  })
+  });
 
-  vueApp.use(i18n)
-})
+  vueApp.use(i18n);
+});

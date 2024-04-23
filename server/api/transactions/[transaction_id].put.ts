@@ -1,9 +1,10 @@
-import { and, eq } from "drizzle-orm";
-import { finance_transactions } from "~/server/database/schema";
-import type { IUpdateTransaction } from "~/server/interfaces/ITransaction";
-import { TransactionSchema } from "~/server/validations/schemas/transactions";
+import { and, eq } from 'drizzle-orm';
 
-const updateTransaction = async ({ 
+import { finance_transactions } from '~/server/database/schema';
+import type { IUpdateTransaction } from '~/server/interfaces/ITransaction';
+import { TransactionSchema } from '~/server/validations/schemas/transactions';
+
+const updateTransaction = async ({
   transaction_id,
   user_id,
   amount,
@@ -29,26 +30,26 @@ const updateTransaction = async ({
       transaction_type: finance_transactions.transaction_type,
       created_at: finance_transactions.created_at,
     });
-  
+
   return model;
-}
+};
 
 export default eventHandler(async (event) => {
-  const transaction_id = getRouterParam(event, 'transaction_id')
+  const transaction_id = getRouterParam(event, 'transaction_id');
   const { user_id } = getJWTData(event.context.token);
   const body = await readBody(event);
 
-  useValidation({schema: TransactionSchema, body})
+  useValidation({schema: TransactionSchema, body});
 
   if(! transaction_id) {
-    return createCustomError({ statusCode: 400 })
+    return createCustomError({ statusCode: 400 });
   }
 
   const model = await updateTransaction({ transaction_id, user_id, ...body });
 
   if(! model) {
-    return createCustomError({ statusCode: 404 })
+    return createCustomError({ statusCode: 404 });
   }
 
   return model;
-})
+});
