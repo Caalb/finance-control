@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { z } from 'zod';
 import { useI18n } from 'vue-i18n';
-
 import type { FormSubmitEvent } from '#ui/types';
 
 const { t } = useI18n();

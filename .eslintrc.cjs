@@ -8,8 +8,18 @@ module.exports = {
   ],
   settings: {
     'import/resolver': {
-      node: {
+      'node': {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        paths: ['node_modules', '.'],
+      },
+      'typescript': {
+        alwaysTryTypes: true
+      },
+      alias: {
+        map: [
+          ['@', './'],
+        ],
+        extensions: ['.js', '.ts', '.vue'],
       },
     },
   },
@@ -26,12 +36,12 @@ module.exports = {
     }],
     'no-multiple-empty-lines': ['error', { 'max': 2, 'maxEOF': 1 }],
     'indent': ['error', 2],
-    'import/named': 2,
     'import/default': 2,
-    'import/namespace': 2,
     'import/no-named-as-default': 2,
     'import/no-named-as-default-member': 2,
     'import/no-duplicates': 2,
+    'import/namespace': 'off',
+    'import/named': 'off',
     'import/order': ['error', {
       'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
       'newlines-between': 'always'
