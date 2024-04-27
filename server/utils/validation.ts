@@ -1,6 +1,6 @@
 import { ZodError } from 'zod';
 
-import { IValidationError } from '@/server/interfaces/IValidation';
+import type { IValidationError } from '@/server/interfaces/IValidation';
 
 export const useValidation = ({ schema, body }: IValidationError) => {
   try {

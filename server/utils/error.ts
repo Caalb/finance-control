@@ -1,4 +1,4 @@
-import { ICustomErrorParams } from '@/server/interfaces/IError';
+import type { ICustomErrorParams } from '@/server/interfaces/IError';
 
 export const createCustomError = ({
   errors,

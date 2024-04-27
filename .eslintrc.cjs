@@ -8,19 +8,21 @@ module.exports = {
   ],
   settings: {
     'import/resolver': {
-      'node': {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        paths: ['node_modules', '.'],
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue']
       },
-      'typescript': {
+
+      typescript: {
         alwaysTryTypes: true
       },
+
       alias: {
         map: [
           ['@', './'],
+          ['~', './']
         ],
-        extensions: ['.js', '.ts', '.vue'],
-      },
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue']
+      }
     },
   },
   rules: {

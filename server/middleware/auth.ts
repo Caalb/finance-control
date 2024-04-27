@@ -5,7 +5,6 @@ import jose from '@panva/jose';
 export default defineEventHandler((event) => {
   const isPublicRoute = useServerAuth().isPublicRoute(event);
   if (isPublicRoute) return;
-
   const token = event.headers.get('Authorization')?.split('Bearer ')[1];
   if (!token) {
     throw createError({
