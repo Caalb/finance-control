@@ -18,6 +18,7 @@ useHead({ title: 'Login Page | Login ' });
           <UButton
             variant="link"
             :padded="false"
+            to="/register"
             size="xl"
           >
             {{ $t('auth.login.sign_up') }}

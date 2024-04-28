@@ -3,8 +3,10 @@ import { createSecretKey } from 'crypto';
 import jose from '@panva/jose';
 
 export default defineEventHandler((event) => {
+  if(! event.path.startsWith('/api/')) return;
   const isPublicRoute = useServerAuth().isPublicRoute(event);
   if (isPublicRoute) return;
+
   const token = event.headers.get('Authorization')?.split('Bearer ')[1];
   if (!token) {
     throw createError({

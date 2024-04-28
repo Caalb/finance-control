@@ -15,7 +15,8 @@ const schema = z.object({
     .regex(/[A-Z]/, { message: t('auth.login.validations.password.uppercase') })
 });
 
-  type Schema = z.output<typeof schema>
+
+type Schema = z.output<typeof schema>
 const form = reactive<Schema>({
   email: '',
   password: '',
