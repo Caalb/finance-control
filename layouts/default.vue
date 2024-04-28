@@ -1,12 +1,16 @@
 <template>
-  <div class="p-10 h-screen">
-    <header class="flex gap-3 items-center justify-end">
-      <ToggleTheme />
-      <SelectLanguage />
-    </header>
+  <div class="h-screen flex">
+    <LayoutSidebar />
 
-    <main class="h-full">
-      <NuxtPage />
-    </main>
+    <div class="p-10 w-full">
+      <header class="flex gap-3 items-center justify-end">
+        <ToggleTheme />
+        <SelectLanguage />
+      </header>
+
+      <main class="h-full">
+        <NuxtPage />
+      </main>
+    </div>
   </div>
 </template>

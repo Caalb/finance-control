@@ -1,0 +1,1 @@
+ALTER TABLE finance_transactions ADD `transaction_type` text NOT NULL;

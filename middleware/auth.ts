@@ -1,9 +1,7 @@
-import { defineNuxtRouteMiddleware} from "#app";
-
-export default defineNuxtRouteMiddleware(() => {
+export default defineNuxtRouteMiddleware(({ path}) => {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated()) {
-    return navigateTo("/login");
+    return navigateTo('/login');
   }
-})
+});

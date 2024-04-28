@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1713106632408,
+      "tag": "0000_tough_silver_surfer",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1713742661487,
+      "tag": "0001_dapper_shard",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1713749163223,
+      "tag": "0002_skinny_human_torch",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,10 +1,19 @@
-import { useStorage } from "@vueuse/core";
-
 export const useAuth = () => {
-  const { value: { expiration}} = useStorage("auth", { expiration: "0" });
+  const isAuthenticated = (): boolean => {
+    const token: string | null = localStorage.getItem('token');
 
-  const isAuthenticated = (): boolean => expiration > new Date().toISOString();
+    if (!token) {
+      return false;
+    }
+
+    const jwt_data = useJWTData();
+
+    if (jwt_data.exp < Date.now() / 1000) {
+      return false;
+    }
+
+    return true;
+  };
 
   return { isAuthenticated };
 };
-

@@ -1,23 +1,25 @@
 <template>
-  <NuxtLayout>
-    <UContainer>
-      <NuxtPage />
-    </UContainer>
+  <div>
+    <NuxtLayout>
+      <UContainer>
+        <NuxtPage />
+      </UContainer>
+    </NuxtLayout>
 
     <UNotifications />
-  </NuxtLayout>
+  </div>
 </template>
 
 <script type="ts" setup>
-  const colorMode = useColorMode()
-  const setThemePreference = () => {
-    const theme = localStorage.getItem('theme')
-    if (theme) {
-      return colorMode.preference = theme
-    }
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    return colorMode.preference = prefersDark ? 'dark' : 'light'
+const colorMode = useColorMode();
+const setThemePreference = () => {
+  const theme = localStorage.getItem('theme');
+  if (theme) {
+    return colorMode.preference = theme;
   }
-  
-  onMounted(() => setThemePreference())
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  return colorMode.preference = prefersDark ? 'dark' : 'light';
+};
+
+onMounted(() => setThemePreference());
 </script>

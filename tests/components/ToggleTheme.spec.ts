@@ -3,18 +3,17 @@ import {
   expect,
   describe,
   beforeEach,
-} from 'vitest'
+} from 'vitest';
+import { mount } from '@vue/test-utils';
+import { mockNuxtImport } from '@nuxt/test-utils/runtime';
 
-import { mount } from "@vue/test-utils";
-import { mockNuxtImport } from '@nuxt/test-utils/runtime'
-
-import { ToggleTheme } from "#components";
+import { ToggleTheme } from '#components';
 
 const createComponent = () => mount(ToggleTheme, {});
 
 mockNuxtImport('useColorMode', () => {
-  return () => ({ value: 'light'})
-})
+  return () => ({ value: 'light'});
+});
 
 describe('ToggleTheme', () => {
   let wrapper: any;
@@ -24,6 +23,6 @@ describe('ToggleTheme', () => {
   });
 
   it('renders correctly', () => {
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-})
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+});

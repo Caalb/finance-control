@@ -1,9 +1,10 @@
-import type { $Fetch } from "ofetch";
-import type { 
-  CryptoHistoryQuery, 
+import type { $Fetch } from 'ofetch';
+
+import type {
+  CryptoHistoryQuery,
   CryptoQuery,
   AllCryptocurrenciesQuery,
- } from './types'
+} from './types';
 
 export default class MobulaService {
   private fetch: $Fetch;
@@ -14,8 +15,7 @@ export default class MobulaService {
 
   async getAnyCryptoPrice(query: CryptoQuery) {
     const { crypto } = query;
-    
-    console.log('query', query)
+
     return await this.fetch('/market/data', {
       method: 'GET',
       query: { asset: crypto }
@@ -24,13 +24,13 @@ export default class MobulaService {
 
   async getCryptoPriceHistory(query: CryptoHistoryQuery) {
     const { crypto, from } = query;
-    
+
     return await this.fetch('/market/history', {
       method: 'GET',
-      query: { 
+      query: {
         asset: crypto,
         from
-       }
+      }
     });
   }
 
@@ -38,17 +38,17 @@ export default class MobulaService {
     return await this.fetch('/all', {
       method: 'GET',
       query: { ...query }
-    })
+    });
   }
 
   async searchCryptocurrencies(query: string) {
     if (!query.trim()) {
-      query = "Bitcoin";
+      query = 'Bitcoin';
     }
-  
+
     return await this.fetch('/search', {
       method: 'GET',
       query: { input: query }
-    })
+    });
   }
 }
