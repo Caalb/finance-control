@@ -21,3 +21,8 @@ export interface IUserLoginResponse {
   data: any;
   success: boolean;
 }
+
+export interface IUserLogoutResponse {
+  data: any;
+  success: boolean;
+}
