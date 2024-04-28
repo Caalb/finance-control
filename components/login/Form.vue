@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
 import type { FormSubmitEvent } from '#ui/types';
 
 import { useUserStore } from '~/stores/user';
 
-const { t } = useI18n();
 const userStore = useUserStore();
 
-
 const remember = ref<boolean>(false);
-const showPassword = ref<boolean>(false);
+const show_password = ref<boolean>(false);
 const tabs_item = [{ label: 'Email' }, { label: 'Username' }];
 const selected_tab = ref<number>(0);
+const request_pending = ref<boolean>(false);
 
 type Schema = {
     email: string;
@@ -25,13 +23,15 @@ const form = reactive<Schema>({
   password: '',
 });
 
-const getEyeIcon = computed<string>(() => showPassword.value
+const getEyeIcon = computed<string>(() => show_password.value
   ? 'i-heroicons-eye-20-solid'
   : 'i-heroicons-eye-slash-20-solid');
 
-const toggleShowPassword = () => showPassword.value = !showPassword.value;
+const toggleShowPassword = () => show_password.value = !show_password.value;
 const onSubmit = async ({ data }: FormSubmitEvent<Schema>) => {
+  request_pending.value = true;
   const { success } =  await userStore.userLogin(data);
+  request_pending.value = false;
 
   if (success) {
     await navigateTo('/');
@@ -43,6 +43,7 @@ const onSubmit = async ({ data }: FormSubmitEvent<Schema>) => {
   <div>
     <UTabs
       :items="tabs_item"
+      class="mb-6"
       @change="selected_tab = $event"
     />
 
@@ -73,7 +74,7 @@ const onSubmit = async ({ data }: FormSubmitEvent<Schema>) => {
       >
         <UInput
           v-model="form.password"
-          :type="showPassword ? 'text' : 'password'"
+          :type="show_password ? 'text' : 'password'"
           :ui="{ icon: { trailing: { pointer: '' } } }"
         >
           <template #trailing>
@@ -102,10 +103,10 @@ const onSubmit = async ({ data }: FormSubmitEvent<Schema>) => {
       <UButton
         type="submit"
         color="primary"
-        class="block w-full mt-5"
-      >
-        {{ $t('auth.login.sign_in') }}
-      </UButton>
+        class=" w-full mt-5 flex justify-center"
+        :label="$t('auth.login.sign_in')"
+        :loading="request_pending"
+      />
     </UForm>
 
     <UDivider

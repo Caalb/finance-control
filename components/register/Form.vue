@@ -9,10 +9,11 @@ const { t } = useI18n();
 const userStore = useUserStore();
 const toast = useToast();
 
-const showPassword = ref<boolean>(false);
-const toggleShowPassword = () => showPassword.value = !showPassword.value;
+const show_password = ref<boolean>(false);
+const request_pending = ref<boolean>(false);
+const toggleShowPassword = () => show_password.value = !show_password.value;
 
-const getEyeIcon = computed<string>(() => showPassword.value
+const getEyeIcon = computed<string>(() => show_password.value
   ? 'i-heroicons-eye-20-solid'
   : 'i-heroicons-eye-slash-20-solid');
 
@@ -37,7 +38,9 @@ const form = reactive<Schema>({
 });
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
+  request_pending.value = true;
   const { success }=   await userStore.registerUser(event.data);
+  request_pending.value = false;
 
   if (success) {
     toast.add({
@@ -99,7 +102,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
         v-model="form.password"
         icon="i-heroicons-lock-closed"
         :placeholder="$t('auth.register.placeholders.password')"
-        :type="showPassword ? 'text' : 'password'"
+        :type="show_password ? 'text' : 'password'"
         :ui="{ icon: { trailing: { pointer: '' } } }"
       >
         <template #trailing>
@@ -113,7 +116,6 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
         </template>
       </UInput>
     </UFormGroup>
-
 
     <UFormGroup
       :label="$t('auth.register.labels.confirm_password')"
@@ -131,6 +133,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
       type="submit"
       block
       :label="$t('auth.register.action_button')"
+      :loading="request_pending"
     />
   </UForm>
 </template>
