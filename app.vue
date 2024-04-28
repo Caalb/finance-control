@@ -1,11 +1,13 @@
 <template>
-  <NuxtLayout>
-    <UContainer>
-      <NuxtPage />
-    </UContainer>
+  <div>
+    <NuxtLayout>
+      <UContainer>
+        <NuxtPage />
+      </UContainer>
+    </NuxtLayout>
 
     <UNotifications />
-  </NuxtLayout>
+  </div>
 </template>
 
 <script type="ts" setup>

@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vueuse/nuxt',
     '@nuxt/test-utils/module',
+    '@pinia/nuxt'
   ],
   typescript: {
     typeCheck: true,

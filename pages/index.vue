@@ -25,7 +25,6 @@ const priceHistory = ref([]);
 const loading = ref<boolean>(false);
 const fetchHistoryLoading = ref<boolean>(false);
 
-
 const fetchHistory = async () => {
   try {
     fetchHistoryLoading.value = true;

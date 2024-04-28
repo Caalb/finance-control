@@ -4,7 +4,7 @@ export interface IUserLogin {
   email?: string;
 }
 
-export interface IUserRegister {
+export interface IRegisterUser {
   username: string;
   password: string;
   email: string;

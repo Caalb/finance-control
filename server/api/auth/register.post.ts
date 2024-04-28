@@ -1,10 +1,10 @@
 import { eq, or } from 'drizzle-orm';
 
 import { users } from '@/server/database/schema';
-import type { IUserRegister } from '~/server/interfaces/IUser';
+import type { IRegisterUser } from '~/server/interfaces/IUser';
 import { RegisterSchema } from '~/server/validations/schemas/user';
 
-const verifyIfExistingUser = async ({ username, email }: IUserRegister) => {
+const verifyIfExistingUser = async ({ username, email }: IRegisterUser) => {
   const db = useDataBase();
   const [ model ] = await db
     .select()
@@ -18,8 +18,8 @@ const verifyIfExistingUser = async ({ username, email }: IUserRegister) => {
 
   if (model) {
     throw createCustomError({
-      statusCode: 400,
-      message: t('auth.user_exists'),
+      statusCode: 422,
+      errors: [t('auth.user_exists')],
     });
   }
 };

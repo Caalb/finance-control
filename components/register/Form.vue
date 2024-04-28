@@ -3,7 +3,17 @@ import { z } from 'zod';
 import { useI18n } from 'vue-i18n';
 import type { FormSubmitEvent } from '#ui/types';
 
+import { useUserStore } from '~/stores/user';
+
 const { t } = useI18n();
+const userStore = useUserStore();
+
+const showPassword = ref<boolean>(false);
+const toggleShowPassword = () => showPassword.value = !showPassword.value;
+
+const getEyeIcon = computed<string>(() => showPassword.value
+  ? 'i-heroicons-eye-20-solid'
+  : 'i-heroicons-eye-slash-20-solid');
 
 const schema = z.object({
   email: z.string().email({ message: t('auth.register.validations.email')}),
@@ -18,15 +28,21 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>
 const form = reactive<Schema>({
-  name: '',
-  email: '',
-  username: '',
-  password: '',
-  confirm_password: '',
+  name: 'chico',
+  email: 'chico@gmail.com',
+  username: 'caalb',
+  password: 'Shazam@123',
+  confirm_password: 'Shazam@123',
 });
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
-  console.log(event);
+  console.log('oiiiiiiiiiii');
+  try {
+    const response = await userStore.registerUser(event.data);
+
+  } catch (error) {
+    console.log(error);
+  }
 };
 </script>
 
@@ -39,7 +55,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
   >
     <UFormGroup
       :label="$t('auth.register.labels.name')"
-      required
+      name="name"
     >
       <UInput
         v-model="form.name"
@@ -50,7 +66,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 
     <UFormGroup
       :label="$t('auth.register.labels.email')"
-      required
+      name="email"
     >
       <UInput
         v-model="form.email"
@@ -61,8 +77,8 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 
     <UFormGroup
       :label="$t('auth.register.labels.username')"
-      required
       eager-validation
+      name="username"
     >
       <UInput
         v-model="form.username"
@@ -73,20 +89,31 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 
     <UFormGroup
       :label="$t('auth.register.labels.password')"
-      required
+      name="password"
     >
       <UInput
         v-model="form.password"
-        :placeholder="$t('auth.register.placeholders.password')"
         icon="i-heroicons-lock-closed"
-        type="password"
-      />
+        :placeholder="$t('auth.register.placeholders.password')"
+        :type="showPassword ? 'text' : 'password'"
+        :ui="{ icon: { trailing: { pointer: '' } } }"
+      >
+        <template #trailing>
+          <UButton
+            color="gray"
+            variant="link"
+            :padded="false"
+            :icon="getEyeIcon"
+            @click="toggleShowPassword"
+          />
+        </template>
+      </UInput>
     </UFormGroup>
 
 
     <UFormGroup
       :label="$t('auth.register.labels.confirm_password')"
-      required
+      name="confirm_password"
     >
       <UInput
         v-model="form.confirm_password"
@@ -98,8 +125,9 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 
     <UButton
       type="submit"
+      block
       :label="$t('auth.register.action_button')"
     />
-  </Uform>
+  </UForm>
 </template>
 
