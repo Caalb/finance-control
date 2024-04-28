@@ -16,5 +16,7 @@ export default defineEventHandler(async (event) => {
   const { user_id } = getJWTData(event.context.token);
   const response = await getAllTransactions(user_id);
 
-  return response;
+  return {
+    data: response
+  };
 });

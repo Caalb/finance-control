@@ -1,24 +1,27 @@
 <script setup lang="ts">
-import { z } from 'zod';
 import { useI18n } from 'vue-i18n';
 import type { FormSubmitEvent } from '#ui/types';
 
+import { useUserStore } from '~/stores/user';
+
 const { t } = useI18n();
+const userStore = useUserStore();
+
+
 const remember = ref<boolean>(false);
 const showPassword = ref<boolean>(false);
+const tabs_item = [{ label: 'Email' }, { label: 'Username' }];
+const selected_tab = ref<number>(0);
 
-const schema = z.object({
-  email: z.string().email({ message: t('auth.login.validations.email')}),
-  password: z.string()
-    .min(8, { message: t('auth.login.validations.password.min') })
-    .regex(/[!@#$%^&*()\-_+=[\]{};:'"\\|<,>.?/]/, { message: t('auth.login.validations.password.special' )})
-    .regex(/[A-Z]/, { message: t('auth.login.validations.password.uppercase') })
-});
+type Schema = {
+    email: string;
+    username: string;
+    password: string;
+}
 
-
-type Schema = z.output<typeof schema>
 const form = reactive<Schema>({
   email: '',
+  username:  '',
   password: '',
 });
 
@@ -27,33 +30,41 @@ const getEyeIcon = computed<string>(() => showPassword.value
   : 'i-heroicons-eye-slash-20-solid');
 
 const toggleShowPassword = () => showPassword.value = !showPassword.value;
-const onSubmit = async ({ data: { email }}: FormSubmitEvent<Schema>) => {
-  const expiration = new Date();
-  expiration.setMinutes(expiration.getMinutes() + 20);
+const onSubmit = async ({ data }: FormSubmitEvent<Schema>) => {
+  const { success } =  await userStore.userLogin(data);
 
-  localStorage.setItem('auth', JSON.stringify({
-    email,
-    expiration: expiration.toISOString(),
-    remember: remember.value,
-  }));
-
-  await navigateTo('/');
+  if (success) {
+    await navigateTo('/');
+  }
 };
 </script>
 
 <template>
   <div>
+    <UTabs
+      :items="tabs_item"
+      @change="selected_tab = $event"
+    />
+
     <UForm
       :state="form"
-      :schema
       class="flex flex-col gap-4"
       @submit="onSubmit"
     >
       <UFormGroup
+        v-if="selected_tab === 0"
         :label="$t('auth.login.labels.email')"
         name="email"
       >
         <UInput v-model="form.email" />
+      </UFormGroup>
+
+      <UFormGroup
+        v-else
+        :label="$t('auth.login.labels.username')"
+        name="username"
+      >
+        <UInput v-model="form.username" />
       </UFormGroup>
 
       <UFormGroup
@@ -87,7 +98,6 @@ const onSubmit = async ({ data: { email }}: FormSubmitEvent<Schema>) => {
           {{ $t('auth.login.forgot_password') }}
         </UButton>
       </div>
-
 
       <UButton
         type="submit"

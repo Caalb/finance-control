@@ -7,6 +7,7 @@ import { useUserStore } from '~/stores/user';
 
 const { t } = useI18n();
 const userStore = useUserStore();
+const toast = useToast();
 
 const showPassword = ref<boolean>(false);
 const toggleShowPassword = () => showPassword.value = !showPassword.value;
@@ -28,20 +29,23 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>
 const form = reactive<Schema>({
-  name: 'chico',
-  email: 'chico@gmail.com',
-  username: 'caalb',
-  password: 'Shazam@123',
-  confirm_password: 'Shazam@123',
+  name: '',
+  email: '',
+  username: '',
+  password: '',
+  confirm_password: '',
 });
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
-  console.log('oiiiiiiiiiii');
-  try {
-    const response = await userStore.registerUser(event.data);
+  const { success }=   await userStore.registerUser(event.data);
 
-  } catch (error) {
-    console.log(error);
+  if (success) {
+    toast.add({
+      title: t('auth.register.success.title'),
+      description: t('auth.register.success.description'),
+    });
+
+    navigateTo('/login');
   }
 };
 </script>
