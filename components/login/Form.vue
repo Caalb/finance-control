@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from '#ui/types';
+import { z } from 'zod';
+import { useI18n } from 'vue-i18n';
 
 import { useUserStore } from '~/stores/user';
 
 const userStore = useUserStore();
+const { t } = useI18n();
 
 const remember = ref<boolean>(false);
 const show_password = ref<boolean>(false);
@@ -11,12 +14,16 @@ const tabs_item = [{ label: 'Email' }, { label: 'Username' }];
 const selected_tab = ref<number>(0);
 const request_pending = ref<boolean>(false);
 
-type Schema = {
-    email: string;
-    username: string;
-    password: string;
-}
+const schema = z.object({
+  email: z.string()
+    .email({  message: t('auth.login.validations.email') })
+    .refine(data => selected_tab.value === 0 ? !!data.length : true),
+  username: z.string()
+    .refine(data => selected_tab.value === 1 ? data.length >= 3 : true),
+  password: z.string().min(1, { message: t('auth.login.validations.password.required')}),
+});
 
+type Schema = z.output<typeof schema>
 const form = reactive<Schema>({
   email: '',
   username:  '',
@@ -49,6 +56,7 @@ const onSubmit = async ({ data }: FormSubmitEvent<Schema>) => {
 
     <UForm
       :state="form"
+      :schema
       class="flex flex-col gap-4"
       @submit="onSubmit"
     >
